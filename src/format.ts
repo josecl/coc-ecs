@@ -28,9 +28,7 @@ export async function doFormat(
   const extensionConfig = workspace.getConfiguration('ecs');
 
   const isUseCache = extensionConfig.get('useCache', false);
-  const isAllowRisky = extensionConfig.get('allowRisky', true);
-  let fixerConfig = extensionConfig.get('config', '');
-  const fixerRules = extensionConfig.get('rules', '@PSR12');
+  const fixerArgs = extensionConfig.get('args', '');
 
   // 1. User setting ecs
   let toolPath = extensionConfig.get('toolPath', '');
@@ -55,40 +53,15 @@ export async function doFormat(
   args.push(toolPath);
   args.push('check');
   args.push('--fix');
+  args.push('--quiet');
 
   if (!isUseCache) {
     args.push('--clear-cache');
   }
 
-  if (isAllowRisky) {
-    //args.push('--allow-risky=yes');
+  if (fixerArgs) {
+    args.push(fixerArgs);
   }
-
-  /*
-  if (fixerConfig) {
-    if (!path.isAbsolute(fixerConfig)) {
-      let currentPath = opts.cwd;
-      const triedPaths = [currentPath];
-      while (!fs.existsSync(currentPath + path.sep + fixerConfig)) {
-        const lastPath = currentPath;
-        currentPath = path.dirname(currentPath);
-        if (lastPath == currentPath) {
-          window.showErrorMessage(`Unable to find ${fixerConfig} file in ${triedPaths.join(', ')}`);
-          return '';
-        } else {
-          triedPaths.push(currentPath);
-        }
-      }
-      fixerConfig = currentPath + path.sep + fixerConfig;
-    }
-
-    args.push('--config=' + fixerConfig);
-  } else {
-    if (fixerRules) {
-      //args.push('--rules=' + fixerRules);
-    }
-  }
-  */
 
   const tmpFile = tmp.fileSync();
   fs.writeFileSync(tmpFile.name, text);
@@ -103,7 +76,6 @@ export async function doFormat(
       if (err) {
         tmpFile.removeCallback();
 
-        window.showErrorMessage('Hola.');
         if (err.code === 'ENOENT') {
           window.showErrorMessage('Unable to find the ecs tool.');
           throw err;

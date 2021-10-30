@@ -42,9 +42,7 @@ If "1" and "2" above are not detected, the download feature will be executed (Th
 - `ecs.enableFormatProvider`: Enable format provider, default: `false`
 - `ecs.toolPath`: The path to the ecs tool (Absolute path), default: `""`
 - `ecs.useCache`: Use a cache file when fixing files (--using-cache), default: `false`
-- `ecs.allowRisky`: Determines whether risky rules are allowed (--allow-risky), default: `false`
-- `ecs.config`: Path to a `.php_cs` or `.ecs.php` file (--config), default: `""`
-- `ecs.rules`: Rules to use when fixing files (--rules), e.g. `"@PSR12,@Symfony"`, default: `"@PSR12"`
+- `ecs.args`: Extra argumentos to `ecs` command
 
 ## Commands
 
@@ -76,7 +74,7 @@ You can add a configuration equivalent to "organize imports" in `ecs` to handle 
 ```jsonc
 {
   // ...snip
-  "ecs.rules": "@PSR12,ordered_imports,no_unused_imports",
+  "ecs.args": "",
   // ...snip
 }
 ```
