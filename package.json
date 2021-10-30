@@ -1,5 +1,5 @@
 {
-  "name": "coc-php-cs-fixer",
+  "name": "coc-ecs",
   "version": "0.3.0",
   "description": "PHP CS Fixer (PHP Coding Standards Fixer) extension for coc.nvim",
   "author": "yaegassy <yosstools@gmail.com>",
@@ -8,7 +8,7 @@
   "keywords": [
     "coc.nvim",
     "php",
-    "php-cs-fixer",
+    "ecs",
     "vim",
     "neovim"
   ],
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yaegassy/coc-php-cs-fixer"
+    "url": "https://github.com/yaegassy/coc-ecs"
   },
   "scripts": {
     "lint": "eslint src --ext ts",
@@ -55,54 +55,54 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "coc-php-cs-fixer configuration",
+      "title": "coc-ecs configuration",
       "properties": {
-        "php-cs-fixer.enable": {
+        "ecs.enable": {
           "type": "boolean",
           "default": true,
-          "description": "Enable coc-php-cs-fixer extension"
+          "description": "Enable coc-ecs extension"
         },
-        "php-cs-fixer.downloadMajorVersion": {
+        "ecs.downloadMajorVersion": {
           "type": "number",
           "enum": [
             2,
             3
           ],
           "default": 3,
-          "description": "Specify the major version of php-cs-fixer to download for the extension",
+          "description": "Specify the major version of ecs to download for the extension",
           "scope": "window"
         },
-        "php-cs-fixer.enableActionProvider": {
+        "ecs.enableActionProvider": {
           "type": "boolean",
           "default": true,
           "description": "Enable codeAction provider"
         },
-        "php-cs-fixer.enableFormatProvider": {
+        "ecs.enableFormatProvider": {
           "type": "boolean",
           "default": false,
           "description": "Enable format provider"
         },
-        "php-cs-fixer.toolPath": {
+        "ecs.toolPath": {
           "type": "string",
           "default": "",
-          "description": "The path to the php-cs-fixer tool (Absolute path)"
+          "description": "The path to the ecs tool (Absolute path)"
         },
-        "php-cs-fixer.useCache": {
+        "ecs.useCache": {
           "type": "boolean",
           "default": false,
           "description": "Use a cache file when fixing files (--using-cache)"
         },
-        "php-cs-fixer.allowRisky": {
+        "ecs.allowRisky": {
           "type": "boolean",
           "default": false,
           "description": "Are risky fixers allowed (--allow-risky)"
         },
-        "php-cs-fixer.config": {
+        "ecs.config": {
           "type": "string",
           "default": "",
-          "description": "Path to a .php_cs or .php-cs-fixer.php file (--config)"
+          "description": "Path to a .php_cs or .ecs.php file (--config)"
         },
-        "php-cs-fixer.rules": {
+        "ecs.rules": {
           "type": "string",
           "default": "@PSR12",
           "description": "Rules to use when fixing files (--rules)"
@@ -111,12 +111,12 @@
     },
     "commands": [
       {
-        "command": "php-cs-fixer.fix",
-        "title": "Run php-cs-fixer fix"
+        "command": "ecs.fix",
+        "title": "Run ecs fix"
       },
       {
-        "command": "php-cs-fixer.download",
-        "title": "Download php-cs-fixer"
+        "command": "ecs.download",
+        "title": "Download ecs"
       }
     ]
   }

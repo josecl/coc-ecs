@@ -25,7 +25,7 @@ function disposeHandlers(): void {
 }
 
 export async function activate(context: ExtensionContext): Promise<void> {
-  const extensionConfig = workspace.getConfiguration('php-cs-fixer');
+  const extensionConfig = workspace.getConfiguration('ecs');
   const isEnable = extensionConfig.get<boolean>('enable', true);
   if (!isEnable) return;
 
@@ -33,7 +33,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
   const isEnableFormatProvider = extensionConfig.get<boolean>('enableFormatProvider', false);
   const isEnableActionProvider = extensionConfig.get<boolean>('enableActionProvider', true);
 
-  const outputChannel = window.createOutputChannel('php-cs-fixer');
+  const outputChannel = window.createOutputChannel('ecs');
 
   const extensionStoragePath = context.storagePath;
   if (!fs.existsSync(extensionStoragePath)) {
@@ -42,10 +42,10 @@ export async function activate(context: ExtensionContext): Promise<void> {
 
   let toolPath = extensionConfig.get('toolPath', '');
   if (!toolPath) {
-    if (fs.existsSync(path.join('vendor', 'bin', 'php-cs-fixer'))) {
-      toolPath = path.join('vendor', 'bin', 'php-cs-fixer');
-    } else if (fs.existsSync(path.join(context.storagePath, 'php-cs-fixer'))) {
-      toolPath = path.join(context.storagePath, 'php-cs-fixer');
+    if (fs.existsSync(path.join('vendor', 'bin', 'ecs'))) {
+      toolPath = path.join('vendor', 'bin', 'ecs');
+    } else if (fs.existsSync(path.join(context.storagePath, 'ecs'))) {
+      toolPath = path.join(context.storagePath, 'ecs');
     }
   }
 
@@ -69,7 +69,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
   registerFormatter();
 
   context.subscriptions.push(
-    commands.registerCommand('php-cs-fixer.fix', async () => {
+    commands.registerCommand('ecs.fix', async () => {
       const doc = await workspace.document;
 
       const code = await doFormat(context, outputChannel, doc.textDocument, undefined);
@@ -81,18 +81,18 @@ export async function activate(context: ExtensionContext): Promise<void> {
   );
 
   context.subscriptions.push(
-    commands.registerCommand('php-cs-fixer.download', async () => {
+    commands.registerCommand('ecs.download', async () => {
       await downloadWrapper(context, downloadMajorVersion);
     })
   );
 
   if (isEnableActionProvider) {
-    context.subscriptions.push(languages.registerCodeActionProvider(languageSelector, actionProvider, 'php-cs-fixer'));
+    context.subscriptions.push(languages.registerCodeActionProvider(languageSelector, actionProvider, 'ecs'));
   }
 }
 
 async function downloadWrapper(context: ExtensionContext, downloadMajorVersion: number) {
-  let msg = 'Do you want to download "php-cs-fixer"?';
+  let msg = 'Do you want to download "ecs"?';
 
   let ret = 0;
   ret = await window.showQuickpick(['Yes', 'Cancel'], msg);
@@ -101,7 +101,7 @@ async function downloadWrapper(context: ExtensionContext, downloadMajorVersion: 
       await download(context, downloadMajorVersion);
     } catch (e) {
       console.error(e);
-      msg = 'Download php-cs-fixer failed, you can get it from https://github.com/FriendsOfPHP/PHP-CS-Fixer';
+      msg = 'Download ecs failed, you can get it from https://github.com/FriendsOfPHP/ecs';
       window.showMessage(msg, 'error');
       return;
     }

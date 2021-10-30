@@ -22,27 +22,27 @@ export async function doFormat(
   range?: Range
 ): Promise<string> {
   if (document.languageId !== 'php') {
-    throw 'php-cs-fixer.fix cannot run, not a php file';
+    throw 'ecs.fix cannot run, not a php file';
   }
 
-  const extensionConfig = workspace.getConfiguration('php-cs-fixer');
+  const extensionConfig = workspace.getConfiguration('ecs');
 
   const isUseCache = extensionConfig.get('useCache', false);
   const isAllowRisky = extensionConfig.get('allowRisky', true);
   let fixerConfig = extensionConfig.get('config', '');
   const fixerRules = extensionConfig.get('rules', '@PSR12');
 
-  // 1. User setting php-cs-fixer
+  // 1. User setting ecs
   let toolPath = extensionConfig.get('toolPath', '');
   if (!toolPath) {
-    if (fs.existsSync(path.join('vendor', 'bin', 'php-cs-fixer'))) {
-      // 2. vendor/bin/php-cs-fixer
-      toolPath = path.join('vendor', 'bin', 'php-cs-fixer');
-    } else if (fs.existsSync(path.join(context.storagePath, 'php-cs-fixer'))) {
-      // 3. builtin php-cs-fixer
-      toolPath = path.join(context.storagePath, 'php-cs-fixer');
+    if (fs.existsSync(path.join('vendor', 'bin', 'ecs'))) {
+      // 2. vendor/bin/ecs
+      toolPath = path.join('vendor', 'bin', 'ecs');
+    } else if (fs.existsSync(path.join(context.storagePath, 'ecs'))) {
+      // 3. builtin ecs
+      toolPath = path.join(context.storagePath, 'ecs');
     } else {
-      throw 'Unable to find the php-cs-fixer tool.';
+      throw 'Unable to find the ecs tool.';
     }
   }
 
@@ -53,14 +53,15 @@ export async function doFormat(
   const opts = { cwd, shell: true };
 
   args.push(toolPath);
-  args.push('fix');
+  args.push('check');
+  args.push('--fix');
 
   if (!isUseCache) {
-    args.push('--using-cache=no');
+    args.push('--clear-cache');
   }
 
   if (isAllowRisky) {
-    args.push('--allow-risky=yes');
+    //args.push('--allow-risky=yes');
   }
 
   if (fixerConfig) {
@@ -83,7 +84,7 @@ export async function doFormat(
     args.push('--config=' + fixerConfig);
   } else {
     if (fixerRules) {
-      args.push('--rules=' + fixerRules);
+      //args.push('--rules=' + fixerRules);
     }
   }
 
@@ -91,7 +92,7 @@ export async function doFormat(
   fs.writeFileSync(tmpFile.name, text);
 
   // ---- Output the command to be executed to channel log. ----
-  outputChannel.appendLine(`${'#'.repeat(10)} php-cs-fixer\n`);
+  outputChannel.appendLine(`${'#'.repeat(10)} ecs\n`);
   outputChannel.appendLine(`Run: php ${args.join(' ')} ${tmpFile.name}`);
   outputChannel.appendLine(`Cwd: ${cwd}\n`);
 
@@ -101,12 +102,12 @@ export async function doFormat(
         tmpFile.removeCallback();
 
         if (err.code === 'ENOENT') {
-          window.showErrorMessage('Unable to find the php-cs-fixer tool.');
+          window.showErrorMessage('Unable to find the ecs tool.');
           throw err;
         }
 
         window.showErrorMessage(
-          'There was an error while running php-cs-fixer. Check the Developer Tools console for more information.'
+          'There was an error while running ecs. Check the Developer Tools console for more information.'
         );
         throw err;
       }

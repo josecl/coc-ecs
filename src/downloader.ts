@@ -12,15 +12,15 @@ const agent = process.env.https_proxy ? new HttpsProxyAgent(process.env.https_pr
 
 export async function download(context: ExtensionContext, downloadMajorVersion: number): Promise<void> {
   const statusItem = window.createStatusBarItem(0, { progress: true });
-  statusItem.text = `Downloading php-cs-fixer`;
+  statusItem.text = `Downloading ecs`;
   statusItem.show();
 
-  let downloadUrl = 'https://cs.symfony.com/download/php-cs-fixer-v3.phar';
+  let downloadUrl = 'https://cs.symfony.com/download/ecs-v3.phar';
   if (typeof downloadMajorVersion === 'number') {
     if (downloadMajorVersion === 3) {
-      downloadUrl = 'https://cs.symfony.com/download/php-cs-fixer-v3.phar';
+      downloadUrl = 'https://cs.symfony.com/download/ecs-v3.phar';
     } else if (downloadMajorVersion === 2) {
-      downloadUrl = 'https://cs.symfony.com/download/php-cs-fixer-v2.phar';
+      downloadUrl = 'https://cs.symfony.com/download/ecs-v2.phar';
     }
   }
 
@@ -36,12 +36,12 @@ export async function download(context: ExtensionContext, downloadMajorVersion: 
   resp.body.on('data', (chunk: Buffer) => {
     cur += chunk.length;
     const p = ((cur / len) * 100).toFixed(2);
-    statusItem.text = `${p}% Downloading php-cs-fixer`;
+    statusItem.text = `${p}% Downloading ecs`;
   });
 
-  const _path = path.join(context.storagePath, 'php-cs-fixer');
+  const _path = path.join(context.storagePath, 'ecs');
   const randomHex = randomBytes(5).toString('hex');
-  const tempFile = path.join(context.storagePath, `php-cs-fixer-${randomHex}`);
+  const tempFile = path.join(context.storagePath, `ecs-${randomHex}`);
 
   const destFileStream = createWriteStream(tempFile, { mode: 0o755 });
   await pipeline(resp.body, destFileStream);

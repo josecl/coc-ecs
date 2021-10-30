@@ -5,10 +5,10 @@ export class FixerCodeActionProvider implements CodeActionProvider {
   public async provideCodeActions(document: TextDocument, range: Range, context: CodeActionContext) {
     const codeActions: CodeAction[] = [];
 
-    const title = `Run: php-cs-fixer.fix`;
+    const title = `Run: ecs.fix`;
     const command = {
       title: '',
-      command: 'php-cs-fixer.fix',
+      command: 'ecs.fix',
     };
 
     const action: CodeAction = {

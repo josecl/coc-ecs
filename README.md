@@ -1,20 +1,20 @@
-# coc-php-cs-fixer
+# coc-ecs
 
-[PHP CS Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) (PHP Coding Standards Fixer) extension for [coc.nvim](https://github.com/neoclide/coc.nvim)
+[PHP CS Fixer](https://github.com/FriendsOfPHP/ecs) (PHP Coding Standards Fixer) extension for [coc.nvim](https://github.com/neoclide/coc.nvim)
 
 ## Install
 
-`:CocInstall coc-php-cs-fixer`
+`:CocInstall coc-ecs`
 
 ## Note
 
-Detects the `php-cs-fixer` command. They are prioritized in order from the top.
+Detects the `ecs` command. They are prioritized in order from the top.
 
-1. `php-cs-fixer.toolPath`
-1. `vendor/bin/php-cs-fixer`
-1. `php-cs-fixer` retrieved by the download feature (`:CocCommand php-cs-fixer.download`)
-    - Mac/Linux: `~/.config/coc/extensions/coc-php-cs-fixer-data/php-cs-fixer`
-    - Windows: `~/AppData/Local/coc/extensions/coc-php-cs-fixer-data/php-cs-fixer`
+1. `ecs.toolPath`
+1. `vendor/bin/ecs`
+1. `ecs` retrieved by the download feature (`:CocCommand ecs.download`)
+    - Mac/Linux: `~/.config/coc/extensions/coc-ecs-data/ecs`
+    - Windows: `~/AppData/Local/coc/extensions/coc-ecs-data/ecs`
 
 If "1" and "2" above are not detected, the download feature will be executed (The prompt will be displayed)
 
@@ -24,37 +24,37 @@ If "1" and "2" above are not detected, the download feature will be executed (Th
 
 **Run from CocCommand**:
 
-- `:CocCommand php-cs-fixer.fix`
+- `:CocCommand ecs.fix`
 
-**If "php-cs-fixer.enableActionProvider" is "true" (default: true)**:
+**If "ecs.enableActionProvider" is "true" (default: true)**:
 
-- `:call CocAction('codeAction')` -> Choose action: "Run: php-cs-fixer.fix"
+- `:call CocAction('codeAction')` -> Choose action: "Run: ecs.fix"
 
-**If "php-cs-fixer.enableFormatProvider" is "true" (default: false)**:
+**If "ecs.enableFormatProvider" is "true" (default: false)**:
 
 - `:call CocAction('format')`
 
 ## Configuration options
 
-- `php-cs-fixer.enable`: Enable coc-php-cs-fixer extension, default: `true`
-- `php-cs-fixer.downloadMajorVersion`: Specify the major version of php-cs-fixer to download for the extension, valid option `[2, 3]`, default: `3`
-- `php-cs-fixer.enableActionProvider`: Enable codeAction provider, default: `true`
-- `php-cs-fixer.enableFormatProvider`: Enable format provider, default: `false`
-- `php-cs-fixer.toolPath`: The path to the php-cs-fixer tool (Absolute path), default: `""`
-- `php-cs-fixer.useCache`: Use a cache file when fixing files (--using-cache), default: `false`
-- `php-cs-fixer.allowRisky`: Determines whether risky rules are allowed (--allow-risky), default: `false`
-- `php-cs-fixer.config`: Path to a `.php_cs` or `.php-cs-fixer.php` file (--config), default: `""`
-- `php-cs-fixer.rules`: Rules to use when fixing files (--rules), e.g. `"@PSR12,@Symfony"`, default: `"@PSR12"`
+- `ecs.enable`: Enable coc-ecs extension, default: `true`
+- `ecs.downloadMajorVersion`: Specify the major version of ecs to download for the extension, valid option `[2, 3]`, default: `3`
+- `ecs.enableActionProvider`: Enable codeAction provider, default: `true`
+- `ecs.enableFormatProvider`: Enable format provider, default: `false`
+- `ecs.toolPath`: The path to the ecs tool (Absolute path), default: `""`
+- `ecs.useCache`: Use a cache file when fixing files (--using-cache), default: `false`
+- `ecs.allowRisky`: Determines whether risky rules are allowed (--allow-risky), default: `false`
+- `ecs.config`: Path to a `.php_cs` or `.ecs.php` file (--config), default: `""`
+- `ecs.rules`: Rules to use when fixing files (--rules), e.g. `"@PSR12,@Symfony"`, default: `"@PSR12"`
 
 ## Commands
 
-- `php-cs-fixer.fix`: Run php-cs-fixer fix
-- `php-cs-fixer.download`: Download php-cs-fixer
-   - By default, the "v3" series will be downloaded. If you want to download "v2" series, please change the `php-cs-fixer.downloadMajorVersion` setting.
+- `ecs.fix`: Run ecs fix
+- `ecs.download`: Download ecs
+   - By default, the "v3" series will be downloaded. If you want to download "v2" series, please change the `ecs.downloadMajorVersion` setting.
 
 ## Code Actions
 
-- `Run: php-cs-fixer.fix`
+- `Run: ecs.fix`
 
 ## TIPS
 
@@ -62,21 +62,21 @@ If "1" and "2" above are not detected, the download feature will be executed (Th
 
 Run from "Code Action" or ":CocCommand" is recommended because it can be used together without any problem even if another coc extension provides the formatting.
 
-- For example, [coc-intelephense](https://github.com/yaegassy/coc-intelephense) + [coc-php-cs-fixer](https://github.com/yaegassy/coc-php-cs-fixer)
-- For example, [coc-phpls](https://github.com/marlonfan/coc-phpls) + [coc-php-cs-fixer](https://github.com/yaegassy/coc-php-cs-fixer)
+- For example, [coc-intelephense](https://github.com/yaegassy/coc-intelephense) + [coc-ecs](https://github.com/yaegassy/coc-ecs)
+- For example, [coc-phpls](https://github.com/marlonfan/coc-phpls) + [coc-ecs](https://github.com/yaegassy/coc-ecs)
 
 ### Equivalent to "organize imports"
 
 The [intelephense](https://github.com/bmewburn/vscode-intelephense) does not currently support "organize imports".
 
-You can add a configuration equivalent to "organize imports" in `php-cs-fixer` to handle this.
+You can add a configuration equivalent to "organize imports" in `ecs` to handle this.
 
 **coc-settings.json**:
 
 ```jsonc
 {
   // ...snip
-  "php-cs-fixer.rules": "@PSR12,ordered_imports,no_unused_imports",
+  "ecs.rules": "@PSR12,ordered_imports,no_unused_imports",
   // ...snip
 }
 ```
