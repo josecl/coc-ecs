@@ -27,7 +27,7 @@ export async function doFormat(
 
   const extensionConfig = workspace.getConfiguration('ecs');
 
-  const isUseCache = extensionConfig.get('useCache', false);
+  const isUseCache = extensionConfig.get('useCache', true);
   const fixerArgs = extensionConfig.get('args', '');
 
   // 1. User setting ecs

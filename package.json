@@ -62,25 +62,10 @@
           "default": true,
           "description": "Enable coc-ecs extension"
         },
-        "ecs.downloadMajorVersion": {
-          "type": "number",
-          "enum": [
-            2,
-            3
-          ],
-          "default": 3,
-          "description": "Specify the major version of ecs to download for the extension",
-          "scope": "window"
-        },
         "ecs.enableActionProvider": {
           "type": "boolean",
           "default": true,
           "description": "Enable codeAction provider"
-        },
-        "ecs.enableFormatProvider": {
-          "type": "boolean",
-          "default": false,
-          "description": "Enable format provider"
         },
         "ecs.toolPath": {
           "type": "string",
@@ -89,8 +74,8 @@
         },
         "ecs.useCache": {
           "type": "boolean",
-          "default": false,
-          "description": "Use a cache file when fixing files (--using-cache)"
+          "default": true,
+          "description": "Use a cache file when fixing files"
         },
         "ecs.args": {
           "type": "string",
@@ -103,10 +88,6 @@
       {
         "command": "ecs.fix",
         "title": "Run ecs fix"
-      },
-      {
-        "command": "ecs.download",
-        "title": "Download ecs"
       }
     ]
   }

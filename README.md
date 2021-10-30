@@ -12,11 +12,12 @@ Detects the `ecs` command. They are prioritized in order from the top.
 
 1. `ecs.toolPath`
 1. `vendor/bin/ecs`
-1. `ecs` retrieved by the download feature (`:CocCommand ecs.download`)
-    - Mac/Linux: `~/.config/coc/extensions/coc-ecs-data/ecs`
-    - Windows: `~/AppData/Local/coc/extensions/coc-ecs-data/ecs`
 
-If "1" and "2" above are not detected, the download feature will be executed (The prompt will be displayed)
+If not found, you should install it, for example with:
+
+```
+composer global require symplify/easy-coding-standard
+```
 
 ## Usage
 
@@ -37,18 +38,13 @@ If "1" and "2" above are not detected, the download feature will be executed (Th
 ## Configuration options
 
 - `ecs.enable`: Enable coc-ecs extension, default: `true`
-- `ecs.downloadMajorVersion`: Specify the major version of ecs to download for the extension, valid option `[2, 3]`, default: `3`
-- `ecs.enableActionProvider`: Enable codeAction provider, default: `true`
-- `ecs.enableFormatProvider`: Enable format provider, default: `false`
 - `ecs.toolPath`: The path to the ecs tool (Absolute path), default: `""`
-- `ecs.useCache`: Use a cache file when fixing files (--using-cache), default: `false`
+- `ecs.useCache`: Use a cache file when fixing files, default: `true`
 - `ecs.args`: Extra argumentos to `ecs` command
 
 ## Commands
 
 - `ecs.fix`: Run ecs fix
-- `ecs.download`: Download ecs
-   - By default, the "v3" series will be downloaded. If you want to download "v2" series, please change the `ecs.downloadMajorVersion` setting.
 
 ## Code Actions
 
