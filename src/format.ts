@@ -64,6 +64,7 @@ export async function doFormat(
     //args.push('--allow-risky=yes');
   }
 
+  /*
   if (fixerConfig) {
     if (!path.isAbsolute(fixerConfig)) {
       let currentPath = opts.cwd;
@@ -87,6 +88,7 @@ export async function doFormat(
       //args.push('--rules=' + fixerRules);
     }
   }
+  */
 
   const tmpFile = tmp.fileSync();
   fs.writeFileSync(tmpFile.name, text);
@@ -101,6 +103,7 @@ export async function doFormat(
       if (err) {
         tmpFile.removeCallback();
 
+        window.showErrorMessage('Hola.');
         if (err.code === 'ENOENT') {
           window.showErrorMessage('Unable to find the ecs tool.');
           throw err;
